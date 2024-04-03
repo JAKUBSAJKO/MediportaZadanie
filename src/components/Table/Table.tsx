@@ -8,13 +8,12 @@ import TableRow from "@mui/material/TableRow";
 import useSWR from "swr";
 import { baseURL } from "../../constants";
 import { Tag } from "../../types";
+import { fetcher } from "../../utils/fetcher";
 
 interface TableProps {
   page: number;
   pageSize: number;
 }
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function Table({ page, pageSize }: TableProps) {
   const { data, error, isLoading } = useSWR(
@@ -22,18 +21,18 @@ export default function Table({ page, pageSize }: TableProps) {
     fetcher
   );
 
-  if (error) return <div>failed to load</div>;
+  if (error) return <div>Error: {error.message}</div>;
   if (isLoading) return <div>loading...</div>;
 
   return (
     <TableContainer component={Paper}>
-      <MUITable sx={{ minWidth: 650 }} aria-label="simple table">
+      <MUITable sx={{ minWidth: 650 }}>
         <TableHead>
           <TableRow>
-            <TableCell align="left" sx={{ fontWeight: "bold" }}>
+            <TableCell align="left" sx={{ fontWeight: "bold", width: "50%" }}>
               Nazwa taga
             </TableCell>
-            <TableCell align="left" sx={{ fontWeight: "bold" }}>
+            <TableCell align="left" sx={{ fontWeight: "bold", width: "50%" }}>
               Liczba powiązanych postów
             </TableCell>
           </TableRow>

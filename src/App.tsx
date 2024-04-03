@@ -33,7 +33,7 @@ export default function App() {
       </Button>
       <Table page={page} pageSize={pageSize} />
       <Pagination
-        count={26}
+        count={25}
         color="primary"
         sx={{ display: "flex", justifyContent: "center", my: 2 }}
         page={page}
