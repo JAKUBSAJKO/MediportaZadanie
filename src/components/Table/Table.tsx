@@ -7,17 +7,13 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import useSWR from "swr";
 import { BaseURL } from "../../constants";
+import { useGlobalStore } from "../../stores/globalStore";
 import { Tag } from "../../types";
 import { fetcher } from "../../utils/fetcher";
 
-interface TableProps {
-  page: number;
-  pageSize: number;
-  sort: string;
-  order: string;
-}
+export default function Table() {
+  const { page, pageSize, sort, order } = useGlobalStore();
 
-export default function Table({ page, pageSize, sort, order }: TableProps) {
   const { data, error, isLoading } = useSWR(
     `${BaseURL}/tags?page=${page}&pagesize=${pageSize}&order=${order}&sort=${sort}&site=stackoverflow`,
     fetcher
@@ -27,7 +23,7 @@ export default function Table({ page, pageSize, sort, order }: TableProps) {
   if (isLoading) return <div>loading...</div>;
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} sx={{ my: 2 }}>
       <MUITable sx={{ minWidth: 650 }}>
         <TableHead>
           <TableRow>

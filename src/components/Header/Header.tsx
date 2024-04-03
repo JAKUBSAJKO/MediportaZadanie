@@ -1,18 +1,12 @@
 import { Box, Button, FormControl, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
-import { ErrorMessages } from "../../constants";
+import { ChangeEvent, useState } from "react";
+import { DefaultValues, ErrorMessages, OrderValues, SortValues } from "../../constants";
+import { useGlobalStore } from "../../stores/globalStore";
 
-interface HeaderProps {
-  size: number;
-  setSize: Dispatch<SetStateAction<number>>;
-  setPageSize: Dispatch<SetStateAction<number>>;
-  sort: string;
-  setSort: Dispatch<SetStateAction<string>>;
-  order: string;
-  setOrder: Dispatch<SetStateAction<string>>;
-}
+export default function Header() {
+  const { setPageSize, sort, setSort, order, setOrder } = useGlobalStore();
 
-export default function Header({ size, setSize, setPageSize, sort, setSort, order, setOrder }: HeaderProps) {
+  const [size, setSize] = useState(DefaultValues.pageSize);
   const [inputError, setInputError] = useState(false);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -65,15 +59,15 @@ export default function Header({ size, setSize, setPageSize, sort, setSort, orde
       <Box>
         <FormControl sx={{ minWidth: 120, mr: 2 }}>
           <Select value={sort} onChange={handleChangeBySort}>
-            <MenuItem value="popular">Popularność</MenuItem>
-            <MenuItem value="activity">Aktywność</MenuItem>
-            <MenuItem value="name">Alfabetycznie</MenuItem>
+            <MenuItem value={SortValues.popular}>Popularność</MenuItem>
+            <MenuItem value={SortValues.activity}>Aktywność</MenuItem>
+            <MenuItem value={SortValues.name}>Alfabetycznie</MenuItem>
           </Select>
         </FormControl>
         <FormControl sx={{ minWidth: 120 }}>
           <Select value={order} onChange={handleChangeByOrder}>
-            <MenuItem value="desc">Malejąco</MenuItem>
-            <MenuItem value="asc">Rosnąco</MenuItem>
+            <MenuItem value={OrderValues.desc}>Malejąco</MenuItem>
+            <MenuItem value={OrderValues.asc}>Rosnąco</MenuItem>
           </Select>
         </FormControl>
       </Box>
