@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import useSWR from "swr";
-import { baseURL } from "../../constants";
+import { BaseURL } from "../../constants";
 import { Tag } from "../../types";
 import { fetcher } from "../../utils/fetcher";
 
@@ -19,7 +19,7 @@ interface TableProps {
 
 export default function Table({ page, pageSize, sort, order }: TableProps) {
   const { data, error, isLoading } = useSWR(
-    `${baseURL}/tags?page=${page}&pagesize=${pageSize}&order=${order}&sort=${sort}&site=stackoverflow`,
+    `${BaseURL}/tags?page=${page}&pagesize=${pageSize}&order=${order}&sort=${sort}&site=stackoverflow`,
     fetcher
   );
 
