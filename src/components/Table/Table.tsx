@@ -13,11 +13,12 @@ import { fetcher } from "../../utils/fetcher";
 interface TableProps {
   page: number;
   pageSize: number;
+  sort: string;
 }
 
-export default function Table({ page, pageSize }: TableProps) {
+export default function Table({ page, pageSize, sort }: TableProps) {
   const { data, error, isLoading } = useSWR(
-    `${baseURL}/tags?page=${page}&pagesize=${pageSize}&order=desc&sort=popular&site=stackoverflow`,
+    `${baseURL}/tags?page=${page}&pagesize=${pageSize}&order=desc&sort=${sort}&site=stackoverflow`,
     fetcher
   );
 

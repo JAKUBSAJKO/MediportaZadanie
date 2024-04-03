@@ -1,4 +1,13 @@
-import { Button, Container, Pagination, TextField } from "@mui/material";
+import {
+  Button,
+  Container,
+  FormControl,
+  MenuItem,
+  Pagination,
+  Select,
+  SelectChangeEvent,
+  TextField,
+} from "@mui/material";
 import { ChangeEvent, useState } from "react";
 import Table from "./components/Table/Table";
 
@@ -7,6 +16,7 @@ export default function App() {
   const [size, setSize] = useState(10);
   const [page, setPage] = useState(1);
   const [error, setError] = useState(false);
+  const [sort, setSort] = useState("popular");
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -27,6 +37,10 @@ export default function App() {
     }
   };
 
+  const handleChange = (event: SelectChangeEvent) => {
+    setSort(event.target.value);
+  };
+
   return (
     <Container maxWidth="xl" sx={{ padding: { xs: "16px", md: "64px 16px" } }}>
       <TextField
@@ -45,7 +59,14 @@ export default function App() {
       <Button variant="contained" size="large" onClick={handleOnClick}>
         Zmień
       </Button>
-      <Table page={page} pageSize={pageSize} />
+      <FormControl sx={{ minWidth: 200 }}>
+        <Select value={sort} onChange={handleChange}>
+          <MenuItem value="popular">Popularności</MenuItem>
+          <MenuItem value="activity">Aktywności</MenuItem>
+          <MenuItem value="name">Nazwy</MenuItem>
+        </Select>
+      </FormControl>
+      <Table page={page} pageSize={pageSize} sort={sort} />
       <Pagination
         count={25}
         color="primary"
