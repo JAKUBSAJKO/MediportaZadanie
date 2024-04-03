@@ -10,14 +10,15 @@ import { baseURL } from "../../constants";
 import { Tag } from "../../types";
 
 interface TableProps {
+  page: number;
   pageSize: number;
 }
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export default function Table({ pageSize }: TableProps) {
+export default function Table({ page, pageSize }: TableProps) {
   const { data, error, isLoading } = useSWR(
-    `${baseURL}/tags?page=1&pagesize=${pageSize}&order=desc&sort=popular&site=stackoverflow`,
+    `${baseURL}/tags?page=${page}&pagesize=${pageSize}&order=desc&sort=popular&site=stackoverflow`,
     fetcher
   );
 

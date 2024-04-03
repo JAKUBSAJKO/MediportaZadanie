@@ -1,10 +1,11 @@
-import { Button, Container, TextField } from "@mui/material";
+import { Box, Button, Container, TextField } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 import Table from "./components/Table/Table";
 
 export default function App() {
   const [pageSize, setPageSize] = useState(10);
   const [size, setSize] = useState(10);
+  const [page, setPage] = useState(1);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -30,7 +31,14 @@ export default function App() {
       <Button variant="contained" size="large" onClick={() => setPageSize(size)}>
         Zmień
       </Button>
-      <Table pageSize={pageSize} />
+      <Table page={page} pageSize={pageSize} />
+      <Button variant="contained" onClick={() => setPage((prev) => prev - 1)} disabled={page < 2}>
+        -
+      </Button>
+      <Box component="p">{page}</Box>
+      <Button variant="contained" onClick={() => setPage((prev) => prev + 1)}>
+        +
+      </Button>
     </Container>
   );
 }
