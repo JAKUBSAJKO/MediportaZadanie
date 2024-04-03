@@ -14,11 +14,12 @@ interface TableProps {
   page: number;
   pageSize: number;
   sort: string;
+  order: string;
 }
 
-export default function Table({ page, pageSize, sort }: TableProps) {
+export default function Table({ page, pageSize, sort, order }: TableProps) {
   const { data, error, isLoading } = useSWR(
-    `${baseURL}/tags?page=${page}&pagesize=${pageSize}&order=desc&sort=${sort}&site=stackoverflow`,
+    `${baseURL}/tags?page=${page}&pagesize=${pageSize}&order=${order}&sort=${sort}&site=stackoverflow`,
     fetcher
   );
 

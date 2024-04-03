@@ -17,6 +17,7 @@ export default function App() {
   const [page, setPage] = useState(1);
   const [error, setError] = useState(false);
   const [sort, setSort] = useState("popular");
+  const [order, setOrder] = useState("desc");
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -37,8 +38,12 @@ export default function App() {
     }
   };
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChangeBySort = (event: SelectChangeEvent) => {
     setSort(event.target.value);
+  };
+
+  const handleChangeByOrder = (event: SelectChangeEvent) => {
+    setOrder(event.target.value);
   };
 
   return (
@@ -59,14 +64,20 @@ export default function App() {
       <Button variant="contained" size="large" onClick={handleOnClick}>
         Zmień
       </Button>
-      <FormControl sx={{ minWidth: 200 }}>
-        <Select value={sort} onChange={handleChange}>
-          <MenuItem value="popular">Popularności</MenuItem>
-          <MenuItem value="activity">Aktywności</MenuItem>
-          <MenuItem value="name">Nazwy</MenuItem>
+      <FormControl sx={{ mx: 1, minWidth: 120 }}>
+        <Select id="select-sort" value={sort} onChange={handleChangeBySort}>
+          <MenuItem value="popular">Popularność</MenuItem>
+          <MenuItem value="activity">Aktywność</MenuItem>
+          <MenuItem value="name">Alfabetycznie</MenuItem>
         </Select>
       </FormControl>
-      <Table page={page} pageSize={pageSize} sort={sort} />
+      <FormControl sx={{ mx: 1, minWidth: 120 }}>
+        <Select id="select-order" value={order} onChange={handleChangeByOrder}>
+          <MenuItem value="desc">Malejąco</MenuItem>
+          <MenuItem value="asc">Rosnąco</MenuItem>
+        </Select>
+      </FormControl>
+      <Table page={page} pageSize={pageSize} sort={sort} order={order} />
       <Pagination
         count={25}
         color="primary"
