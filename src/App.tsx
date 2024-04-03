@@ -1,4 +1,4 @@
-import { Box, Button, Container, TextField } from "@mui/material";
+import { Button, Container, Pagination, TextField } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 import Table from "./components/Table/Table";
 
@@ -32,13 +32,15 @@ export default function App() {
         Zmień
       </Button>
       <Table page={page} pageSize={pageSize} />
-      <Button variant="contained" onClick={() => setPage((prev) => prev - 1)} disabled={page < 2}>
-        -
-      </Button>
-      <Box component="p">{page}</Box>
-      <Button variant="contained" onClick={() => setPage((prev) => prev + 1)}>
-        +
-      </Button>
+      <Pagination
+        count={26}
+        color="primary"
+        sx={{ display: "flex", justifyContent: "center", my: 2 }}
+        page={page}
+        onChange={(_, value: number) => {
+          setPage(value);
+        }}
+      />
     </Container>
   );
 }
