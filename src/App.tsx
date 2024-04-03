@@ -1,10 +1,36 @@
-import { Container } from "@mui/material";
+import { Button, Container, TextField } from "@mui/material";
+import { ChangeEvent, useState } from "react";
 import Table from "./components/Table/Table";
 
 export default function App() {
+  const [pageSize, setPageSize] = useState(10);
+  const [size, setSize] = useState(10);
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    const parsedNumber = parseInt(inputValue);
+    if (!isNaN(parsedNumber)) {
+      setSize(parsedNumber);
+    }
+  };
+
   return (
     <Container maxWidth="xl" sx={{ padding: { xs: "16px", md: "64px 16px" } }}>
-      <Table />
+      <TextField
+        label="Liczba elementów na stronie"
+        type="number"
+        sx={{ minWidth: 200 }}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        inputProps={{ min: 1, max: 100 }}
+        value={size}
+        onChange={handleInputChange}
+      />
+      <Button variant="contained" size="large" onClick={() => setPageSize(size)}>
+        Zmień
+      </Button>
+      <Table pageSize={pageSize} />
     </Container>
   );
 }
