@@ -10,6 +10,7 @@ import { BaseURL } from "../../constants";
 import { useGlobalStore } from "../../stores/globalStore";
 import { Tag } from "../../types";
 import { fetcher } from "../../utils/fetcher";
+import TableSkeleton from "./components/TableSkeleton";
 
 export default function Table() {
   const { page, pageSize, sort, order } = useGlobalStore();
@@ -34,9 +35,7 @@ export default function Table() {
         </TableHead>
         <TableBody>
           {isLoading ? (
-            <TableRow>
-              <TableCell>Loading...</TableCell>
-            </TableRow>
+            <TableSkeleton length={pageSize} />
           ) : error ? (
             <TableRow>
               <TableCell sx={{ color: "#B80C09" }}>Error: {error.message}</TableCell>
