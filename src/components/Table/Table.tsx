@@ -5,6 +5,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { RefObject } from "react";
 import useSWR from "swr";
 import { BaseURL } from "../../constants";
 import { useGlobalStore } from "../../stores/globalStore";
@@ -12,7 +13,11 @@ import { Tag } from "../../types";
 import { fetcher } from "../../utils/fetcher";
 import TableSkeleton from "./components/TableSkeleton";
 
-export default function Table() {
+interface TableProps {
+  tableRef: RefObject<HTMLTableElement>;
+}
+
+export default function Table({ tableRef }: TableProps) {
   const { page, pageSize, sort, order } = useGlobalStore();
 
   const { data, error, isLoading } = useSWR(
@@ -22,7 +27,7 @@ export default function Table() {
 
   return (
     <TableContainer component={Paper} sx={{ my: 2 }}>
-      <MUITable sx={{ minWidth: 650 }}>
+      <MUITable ref={tableRef} sx={{ minWidth: 650 }}>
         <TableHead>
           <TableRow>
             <TableCell align="left" sx={{ fontWeight: "bold", width: "50%" }}>
