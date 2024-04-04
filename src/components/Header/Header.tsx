@@ -29,12 +29,20 @@ export default function Header() {
   };
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: { xs: "column", md: "row" },
+        justifyContent: "space-between",
+        alignItems: { md: "center" },
+        gap: { xs: 2, md: 0 },
+      }}
+    >
+      <Box sx={{ display: "flex", justifyContent: { md: "center" }, alignItems: "center" }}>
         <TextField
           label="Liczba elementów na stronie"
           type="number"
-          sx={{ minWidth: 200, mr: 2 }}
+          sx={{ minWidth: { xs: 140, md: 200 }, mr: 2 }}
           InputLabelProps={{
             shrink: true,
           }}
@@ -49,14 +57,14 @@ export default function Header() {
         </Button>
       </Box>
       <Box>
-        <FormControl sx={{ minWidth: 160, mr: 2 }}>
+        <FormControl sx={{ minWidth: { xs: 120, md: 160 }, mr: 2 }}>
           <Select value={sort} onChange={(event: SelectChangeEvent) => setSort(event.target.value)}>
             <MenuItem value={SortValues.popular}>Popularność</MenuItem>
             <MenuItem value={SortValues.activity}>Aktywność</MenuItem>
             <MenuItem value={SortValues.name}>Alfabetycznie</MenuItem>
           </Select>
         </FormControl>
-        <FormControl sx={{ minWidth: 160 }}>
+        <FormControl sx={{ minWidth: { xs: 120, md: 160 } }}>
           <Select value={order} onChange={(event: SelectChangeEvent) => setOrder(event.target.value)}>
             <MenuItem value={OrderValues.desc}>Malejąco</MenuItem>
             <MenuItem value={OrderValues.asc}>Rosnąco</MenuItem>

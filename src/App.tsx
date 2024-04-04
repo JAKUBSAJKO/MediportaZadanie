@@ -7,7 +7,7 @@ export default function App() {
   const { page, setPage } = useGlobalStore();
 
   return (
-    <Container maxWidth="xl" sx={{ padding: { xs: "16px", md: "64px 16px" } }}>
+    <Container maxWidth="xl" sx={{ padding: { xs: "16px", md: "64px" } }}>
       <Header />
       <Table />
       <Pagination
