@@ -28,14 +28,6 @@ export default function Header() {
     }
   };
 
-  const handleChangeBySort = (event: SelectChangeEvent) => {
-    setSort(event.target.value);
-  };
-
-  const handleChangeByOrder = (event: SelectChangeEvent) => {
-    setOrder(event.target.value);
-  };
-
   return (
     <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
       <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
@@ -58,14 +50,14 @@ export default function Header() {
       </Box>
       <Box>
         <FormControl sx={{ minWidth: 160, mr: 2 }}>
-          <Select value={sort} onChange={handleChangeBySort}>
+          <Select value={sort} onChange={(event: SelectChangeEvent) => setSort(event.target.value)}>
             <MenuItem value={SortValues.popular}>Popularność</MenuItem>
             <MenuItem value={SortValues.activity}>Aktywność</MenuItem>
             <MenuItem value={SortValues.name}>Alfabetycznie</MenuItem>
           </Select>
         </FormControl>
         <FormControl sx={{ minWidth: 160 }}>
-          <Select value={order} onChange={handleChangeByOrder}>
+          <Select value={order} onChange={(event: SelectChangeEvent) => setOrder(event.target.value)}>
             <MenuItem value={OrderValues.desc}>Malejąco</MenuItem>
             <MenuItem value={OrderValues.asc}>Rosnąco</MenuItem>
           </Select>
