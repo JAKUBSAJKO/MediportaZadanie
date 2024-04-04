@@ -19,3 +19,14 @@ export const OrderValues = {
   desc: "desc",
   asc: "asc",
 };
+
+export const SortArray = [
+  { id: 1, name: "Popularność", value: SortValues.popular },
+  { id: 2, name: "Aktywność", value: SortValues.activity },
+  { id: 3, name: "Alfabetycznie", value: SortValues.name },
+];
+
+export const OrderArray = [
+  { id: 1, name: "Malejąco", value: OrderValues.desc },
+  { id: 2, name: "Rosnąco", value: OrderValues.asc },
+];

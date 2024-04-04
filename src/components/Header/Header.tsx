@@ -1,7 +1,8 @@
-import { Box, Button, FormControl, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { ChangeEvent, useState } from "react";
-import { DefaultValues, ErrorMessages, OrderValues, SortValues } from "../../constants";
+import { DefaultValues, ErrorMessages, OrderArray, SortArray } from "../../constants";
 import { useGlobalStore } from "../../stores/globalStore";
+import Select from "../Select/Select";
 
 export default function Header() {
   const { setPageSize, sort, setSort, order, setOrder } = useGlobalStore();
@@ -57,19 +58,8 @@ export default function Header() {
         </Button>
       </Box>
       <Box>
-        <FormControl sx={{ minWidth: { xs: 120, md: 160 }, mr: 2 }}>
-          <Select value={sort} onChange={(event: SelectChangeEvent) => setSort(event.target.value)}>
-            <MenuItem value={SortValues.popular}>Popularność</MenuItem>
-            <MenuItem value={SortValues.activity}>Aktywność</MenuItem>
-            <MenuItem value={SortValues.name}>Alfabetycznie</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl sx={{ minWidth: { xs: 120, md: 160 } }}>
-          <Select value={order} onChange={(event: SelectChangeEvent) => setOrder(event.target.value)}>
-            <MenuItem value={OrderValues.desc}>Malejąco</MenuItem>
-            <MenuItem value={OrderValues.asc}>Rosnąco</MenuItem>
-          </Select>
-        </FormControl>
+        <Select value={sort} setValue={setSort} data={SortArray} />
+        <Select value={order} setValue={setOrder} data={OrderArray} margin />
       </Box>
     </Box>
   );
