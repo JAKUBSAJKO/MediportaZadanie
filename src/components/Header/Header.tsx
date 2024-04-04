@@ -57,14 +57,14 @@ export default function Header() {
         </Button>
       </Box>
       <Box>
-        <FormControl sx={{ minWidth: 120, mr: 2 }}>
+        <FormControl sx={{ minWidth: 160, mr: 2 }}>
           <Select value={sort} onChange={handleChangeBySort}>
             <MenuItem value={SortValues.popular}>Popularność</MenuItem>
             <MenuItem value={SortValues.activity}>Aktywność</MenuItem>
             <MenuItem value={SortValues.name}>Alfabetycznie</MenuItem>
           </Select>
         </FormControl>
-        <FormControl sx={{ minWidth: 120 }}>
+        <FormControl sx={{ minWidth: 160 }}>
           <Select value={order} onChange={handleChangeByOrder}>
             <MenuItem value={OrderValues.desc}>Malejąco</MenuItem>
             <MenuItem value={OrderValues.asc}>Rosnąco</MenuItem>

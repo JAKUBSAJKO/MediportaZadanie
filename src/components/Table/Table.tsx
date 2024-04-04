@@ -19,9 +19,6 @@ export default function Table() {
     fetcher
   );
 
-  if (error) return <div>Error: {error.message}</div>;
-  if (isLoading) return <div>loading...</div>;
-
   return (
     <TableContainer component={Paper} sx={{ my: 2 }}>
       <MUITable sx={{ minWidth: 650 }}>
@@ -36,13 +33,23 @@ export default function Table() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data &&
+          {isLoading ? (
+            <TableRow>
+              <TableCell>Loading...</TableCell>
+            </TableRow>
+          ) : error ? (
+            <TableRow>
+              <TableCell sx={{ color: "#B80C09" }}>Error: {error.message}</TableCell>
+            </TableRow>
+          ) : (
+            data &&
             data.items.map((item: Tag) => (
               <TableRow key={item.name}>
                 <TableCell align="left">{item.name}</TableCell>
                 <TableCell align="left">{item.count}</TableCell>
               </TableRow>
-            ))}
+            ))
+          )}
         </TableBody>
       </MUITable>
     </TableContainer>
